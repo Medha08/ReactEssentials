@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      //React Component -> using JS classes -> Class Based Component
+      //classes are a way to blueprint object
+      class App extends React.Component {
+        //JS Object can have data or UI State
+        state = {
+          name: "Medha",
+          age: 30
+        };
+        // Can use React in extends as we wrote import script for React in head
+        //React.Component  is used to inherit all base functionalities of Component in the class to make it a component => react component
+        //mandatory function => render to render our templates to whatever elt you want to render to
+        render() {
+          return (
+            //JSX not supported by default so we need babel to transpile our code for browsers to understand.
+            //JSX way is way to write JS in html
+            //return only one root element ie here nest as many elements inside div
+            // class in JS is reserved keyword can not use class inside the div in JSX so use classsName to add css classes
+            //can output dynamic JS content inside the curly braces {{}}// each time refresh diff random no.
+            //this here references the component
+            <div className="app-component">
+              <h1>Hey, Ninjas</h1>
+              <p>
+                My name is {this.state.name} and I am {this.state.age}{" "}
+              </p>
+              <p>{Math.random() * 10}</p>
+            </div>
+          );
+        }
+      }
+      //To render the component at div with id app use REACTDOM library's render menthod (glue btw React and DOM)
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
