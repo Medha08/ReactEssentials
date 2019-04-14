@@ -30,20 +30,47 @@
         // Can use React in extends as we wrote import script for React in head
         //React.Component  is used to inherit all base functionalities of Component in the class to make it a component => react component
         //mandatory function => render to render our templates to whatever elt you want to render to
+        handleClick(e) {
+          console.log(e.target);
+          //will throw error as you cannot read state in functions(DOM events reactions ie onClick) due to scope of "this",you can use this.state in return stmt(template) where we render the component
+          //as context of the "this" keyword is lost and is set to undefined (this) in the functions called from reactions on browser DOM events
+          // so to use this convert this function to arrow function which binds the context of this to whatever is this's context outside function (inside class which is considered outside of custom function;'s scope where it points (this's context outside of this cutom function) is binded to class Component instance thus with an
+          //arrow function there won't be any error as the this keyword now will bind to context of outside this which is react component instance (inside React class component))
+          console.log(this.state);
+        }
+
+        handleClick2 = (e)=>{
+            console.log(this.state);
+        }
+
+        handleOnMouseOver(e) {
+          console.log(e, e.target, e.pageX);
+        }
+        handleOnCopy(e) {
+          console.log("This is my Work!");
+        }
+
         render() {
           return (
+              //context of this is manually bind in render() function but not in our custom functuins there we have to do it manually
             //JSX not supported by default so we need babel to transpile our code for browsers to understand.
             //JSX way is way to write JS in html
             //return only one root element ie here nest as many elements inside div
             // class in JS is reserved keyword can not use class inside the div in JSX so use classsName to add css classes
             //can output dynamic JS content inside the curly braces {{}}// each time refresh diff random no.
             //this here references the component
+            //event handlers used to handle user interactions and state changes due to it thi.handleClick is when outpuuted on user click first the funtion is found and then invoked which is safer that this.handleClick() which automatically invokes functuin on component rendering
+            //JS functions or any JS dynamic content is handled inside {}, which JS objects dynamic are handled by {{}}.this.handleClick because handleClick is the function if the current component,like state
             <div className="app-component">
               <h1>Hey, Ninjas</h1>
               <p>
-                My name is {this.state.name} and I am {this.state.age}{" "}
+                My name is {this.state.name} and I am {this.state.age}
               </p>
               <p>{Math.random() * 10}</p>
+              <button onClick={this.handleClick}>Click Me</button>
+              <button onClick={this.handleClick2}>Click Me</button>
+              <button onMouseOver={this.handleOnMouseOver}>Mouse Over</button>
+              <p onCopy={this.handleOnCopy}>Some Important Work!</p>
             </div>
           );
         }
