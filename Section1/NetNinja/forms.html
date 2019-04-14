@@ -28,13 +28,19 @@
         handleOnChange = (e)=>{
             this.setState({
             name:e.target.value
-          }); 
+          });
         }
+
+        handleOnSubmit = (e)=>{
+            e.preventDefault();//preventing submit button's default event behaviour to refresh page on form submit
+            console.log("Form submitted,",this.state.name)
+        }
+        //we could have added onSubmit at button also but that won't have captured Submit by Enter button which can be done on placing the event handler on form tag using onSubmit
         render() {
           return (
             <div className="app-component">
               <h1>My name is {this.state.name}</h1>
-              <form>
+              <form onSubmit ={ this.handleOnSubmit}>
                 <input type="text" onChange={this.handleOnChange}/>
                 <button>Submit</button>
               </form>
