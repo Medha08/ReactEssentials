@@ -39,9 +39,16 @@
           console.log(this.state);
         }
 
-        handleClick2 = (e)=>{
-            console.log(this.state);
-        }
+        handleClick2 = e => {
+          //value of this inside these arrow functions now are equal to component instance so can use component's state variables too with this.state
+          console.log(this.state);
+          //to change state
+          //this.state.name ="shruti" //bad practice don't change the state directly
+          this.setState({
+            name: "Shruti",
+            age: 25
+          }); //this is the function to change state , we pass object that represent state whatever properties we want to change we can pass her or whole object
+        };
 
         handleOnMouseOver(e) {
           console.log(e, e.target, e.pageX);
@@ -52,7 +59,7 @@
 
         render() {
           return (
-              //context of this is manually bind in render() function but not in our custom functuins there we have to do it manually
+            //context of this is manually bind in render() function but not in our custom functuins there we have to do it manually
             //JSX not supported by default so we need babel to transpile our code for browsers to understand.
             //JSX way is way to write JS in html
             //return only one root element ie here nest as many elements inside div
